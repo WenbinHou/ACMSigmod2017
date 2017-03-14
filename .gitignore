@@ -1,0 +1,8 @@
+
+# Ignore submission.tar.gz
+submission.tar
+submission.tar.gz
+
+# Ignore GCC build results
+ngram_gcc*
+
