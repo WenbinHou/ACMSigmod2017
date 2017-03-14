@@ -14,8 +14,8 @@ submission.tar.gz
 # Ignore Visual Studio build results but remain the exe & pdb
 obj/
 bin/*/*
-!*.exe
-!*.pdb
+#!*.exe
+#!*.pdb
 
 # Don't Ignore GCC/ICC build results
 !*_gcc*
