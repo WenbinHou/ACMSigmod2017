@@ -3,6 +3,25 @@
 submission.tar
 submission.tar.gz
 
-# Ignore GCC build results
-ngram_gcc*
+
+# Ignore Visual Studio temporary files
+.vs/
+*.suo
+*.user
+*.VC.db
+*.VC.VC.opendb
+
+# Ignore Visual Studio build results but remain the exe & pdb
+obj/
+bin/*/*
+!*.exe
+!*.pdb
+
+# Don't Ignore GCC/ICC build results
+!*_gcc*
+!*_icc*
+
+
+# Ignore occasionally vim swap files
+*.swp
 

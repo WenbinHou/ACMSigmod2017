@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pku45a618", "pku45a618\pku45a618.vcxproj", "{2D070BF5-D5D3-470E-8E23-7F51D9B24DBF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "launcher", "launcher\launcher.vcxproj", "{B2DD75BF-9F64-49B8-9250-A1606B1188AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D070BF5-D5D3-470E-8E23-7F51D9B24DBF}.Debug|x64.ActiveCfg = Debug|x64
+		{2D070BF5-D5D3-470E-8E23-7F51D9B24DBF}.Debug|x64.Build.0 = Debug|x64
+		{2D070BF5-D5D3-470E-8E23-7F51D9B24DBF}.Release|x64.ActiveCfg = Release|x64
+		{2D070BF5-D5D3-470E-8E23-7F51D9B24DBF}.Release|x64.Build.0 = Release|x64
+		{B2DD75BF-9F64-49B8-9250-A1606B1188AD}.Debug|x64.ActiveCfg = Debug|x64
+		{B2DD75BF-9F64-49B8-9250-A1606B1188AD}.Debug|x64.Build.0 = Debug|x64
+		{B2DD75BF-9F64-49B8-9250-A1606B1188AD}.Release|x64.ActiveCfg = Release|x64
+		{B2DD75BF-9F64-49B8-9250-A1606B1188AD}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
