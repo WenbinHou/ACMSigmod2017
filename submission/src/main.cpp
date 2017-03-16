@@ -1,7 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <string>
+#include "common.h"
+#include "hashmap.h"
 #include <cassert>
+
 
 int main(int argc, char* argv[])
 {
@@ -15,6 +15,11 @@ int main(int argc, char* argv[])
 			break;
 		}
 	}
+
+    //PatternMap.GetOrAdd(98);
+    
+    std::atomic_bool Lock;
+    Lock = false;
 
 	bool lastIsF = false;
 	while (true) {

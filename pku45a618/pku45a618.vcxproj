@@ -87,6 +87,13 @@
   <ItemGroup>
     <ClCompile Include="..\submission\src\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\submission\src\common.h" />
+    <ClInclude Include="..\submission\src\debug.h" />
+    <ClInclude Include="..\submission\src\defs.h" />
+    <ClInclude Include="..\submission\src\hashmap.h" />
+    <ClInclude Include="..\submission\src\reader.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

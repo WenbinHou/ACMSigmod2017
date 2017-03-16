@@ -1,17 +1,10 @@
 #ifdef _WIN32
 
-#define WIN32_LEAN_AND_MEAN
-#define _CRT_SECURE_NO_WARNINGS
-
-#include <Windows.h>
-#include <algorithm>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <vector>
-#include <cassert>
+#include "../submission/src/common.h"
 #include <deque>
-#include <cstdlib>
+
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 
 #define BUFFER_SIZE		(1048576 * 256)
 
@@ -24,7 +17,7 @@ void ReadAllLines(const string& filePath, __out vector<string>& lines)
 {
 	ifstream fs;
 	fs.open(filePath, ios::in | ios::binary);
-	assert(fs);
+	ASSERT(fs);
 	string line;
 	while (getline(fs, line, '\n')) {
 		size_t len = line.size();
@@ -39,7 +32,7 @@ void ReadAllLines(const string& filePath, __out vector<string>& lines)
 
 int GetFileSize(const string& filePath) {
 	FILE* file = fopen(filePath.c_str(), "rb");
-	assert(file);
+	ASSERT(file);
 	fseek(file, 0, SEEK_END);
 	int size = ftell(file);
 	fclose(file);
@@ -54,7 +47,7 @@ void MyCreatePipe(__out HANDLE& hRead, __out HANDLE& hWrite)
 	sa.bInheritHandle = TRUE;
 
 	BOOL succ = CreatePipe(&hRead, &hWrite, &sa, BUFFER_SIZE);
-	assert(succ);
+    ASSERT(succ);
 }
 
 void MyCreateProcess(const string filePath)
@@ -81,14 +74,14 @@ void MyCreateProcess(const string filePath)
 		nullptr,
 		&sInfo,
 		&pInfo);
-	assert(succ);
+    ASSERT(succ);
 
 	HANDLE dummyTarget;
 	succ = DuplicateHandle(pInfo.hProcess, stdin_w, GetCurrentProcess(), &dummyTarget, 0, FALSE, DUPLICATE_CLOSE_SOURCE);
-	assert(succ);
+    ASSERT(succ);
 	CloseHandle(dummyTarget);
 	succ = DuplicateHandle(pInfo.hProcess, stdout_r, GetCurrentProcess(), &dummyTarget, 0, FALSE, DUPLICATE_CLOSE_SOURCE);
-	assert(succ);
+    ASSERT(succ);
 	CloseHandle(dummyTarget);
 
 	CloseHandle(pInfo.hProcess);
@@ -102,8 +95,8 @@ void WriteLine(const string& line, bool flush = false) {
 	if (flush) {
 		DWORD writtenBytes;
 		BOOL success = WriteFile(stdin_w, buf.c_str(), (DWORD)buf.size(), &writtenBytes, NULL);
-		assert(success);
-		assert(writtenBytes == buf.size());
+        ASSERT(success);
+        ASSERT(writtenBytes == buf.size());
 		buf.resize(0);
 	}
 }
@@ -117,7 +110,7 @@ string ReadLine() {
 
 			DWORD totBytes, readBytes;
 			BOOL success = PeekNamedPipe(stdout_r, nullptr, 0, NULL, &totBytes, NULL);
-			assert(success);
+			ASSERT(success);
 			if (totBytes == 0) {
 				Sleep(1);
 				continue;
@@ -125,13 +118,13 @@ string ReadLine() {
 
 			totBytes = (DWORD)min(totBytes, sizeof(buf) - curr);
 			success = ReadFile(stdout_r, buf + curr, totBytes, &readBytes, NULL);
-			assert(success);
-			assert(readBytes == totBytes);
+            ASSERT(success);
+            ASSERT(readBytes == totBytes);
 
 			char* st = buf;
 			for (char* p = buf + curr; p < (buf + curr) + readBytes; ++p) {
 				if (*p == '\r' && p + 1 < (buf + curr) + readBytes) {
-					assert(*(p + 1) == '\n');
+                    ASSERT(*(p + 1) == '\n');
 					dq.push_back(string(st, p - st));
 					st = p + 2;
 					++p;
@@ -143,12 +136,12 @@ string ReadLine() {
 			}
 
 			if (st == buf) {  // This is not a '\n' in this read
-				assert(dq.size() == 0);
+                ASSERT(dq.size() == 0);
 				continue;
 			}
 
-			assert(dq.size() > 0);
-			assert(st > buf && st <= (buf + curr) + readBytes);
+            ASSERT(dq.size() > 0);
+            ASSERT(st > buf && st <= (buf + curr) + readBytes);
 			size_t newCurr = (buf + curr + readBytes) - st;
 			memmove(buf, st, newCurr);
 			curr = newCurr;
@@ -156,7 +149,7 @@ string ReadLine() {
 		}
 	}
 
-	assert(dq.size());
+    ASSERT(dq.size());
 	const string line = dq.front();
 	dq.pop_front();
 	return line;
