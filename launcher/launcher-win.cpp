@@ -210,7 +210,7 @@ int main(int argc, char* argv[])
 	MyCreateProcess(exePath);
 
 	//
-	// Write the init file
+	// Write the initial file
 	//
 	for (auto it = lnInit.begin(); it != lnInit.end(); ++it) {
 		WriteLine(*it);
@@ -224,13 +224,19 @@ int main(int argc, char* argv[])
 	fprintf(stdout, "[Launcher] Initial file processed. Start working...\n");
 	fflush(stdout);
 
-	ULONGLONG stTime = GetTickCount64();
+    //
+    // Write the working file
+    //
 	for (auto it = lnWork.begin(); it != lnWork.end(); ++it) {
 		WriteLine(*it);
 	}
-	WriteLine("F", true);
+    ULONGLONG stTime = GetTickCount64();
+    WriteLine("F", true);
 	CloseHandle(stdin_w);
 
+    //
+    // Get result from output
+    //
 	for (size_t i = 0; i < lnWork.size(); ++i) {
 		line = ReadLine();
 		//fprintf(stdout, "%s\n", line.c_str());
